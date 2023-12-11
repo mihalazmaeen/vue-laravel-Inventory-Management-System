@@ -9,13 +9,18 @@
   <meta name="author" content="">
   <link href="{{asset('backend/img/logo/logo.png')}}" rel="icon">
   <title>RuangAdmin - Dashboard</title>
+ 
   <link href="{{asset('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('backend/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('backend/css/ruang-admin.min.css')}}" rel="stylesheet">
-  <link href="{{asset('css/app.css')}}" rel="stylesheet">
+  
+  @vite('resources/js/app.js','resources/css/app.css')
 </head>
 
 <body id="page-top">
+    <div id="app">
+
+ 
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
@@ -296,6 +301,11 @@
             </li>
           </ul>
         </nav>
+        <div class="container-fluid" id="container-wrapper">
+            <router-view>
+
+            </router-view>
+        </div>
         <!-- Topbar -->
 
         <!-- Container Fluid-->
@@ -303,12 +313,12 @@
         <!---Container Fluid-->
       </div>
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        
-      </footer>
+    
       <!-- Footer -->
     </div>
   </div>
+
+     </div>
 
   <!-- Scroll to top -->
   <a class="scroll-to-top rounded" href="#page-top">
@@ -319,7 +329,8 @@
   <script src="{{asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('backend/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
   <script src="{{asset('backend/js/ruang-admin.min.js')}}"></script>
-  <script src="{{asset('js/app.js')}}"></script>
+ {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+
   <script src="{{asset('backend/vendor/chart.js/Chart.min.js')}}"></script>
   <script src="{{asset('backend/js/demo/chart-area-demo.js')}}"></script>  
 </body>
