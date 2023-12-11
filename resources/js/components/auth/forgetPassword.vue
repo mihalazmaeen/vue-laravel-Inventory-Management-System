@@ -8,23 +8,15 @@
               <div class="col-lg-12">
                 <div class="login-form">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Login</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Forget Password</h1>
                   </div>
                   <form class="user">
                     <div class="form-group">
                       <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
                         placeholder="Enter Email Address">
                     </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember
-                          Me</label>
-                      </div>
-                    </div>
+                 
+                   
                     <div class="form-group">
                       <a href="index.html" class="btn btn-primary btn-block">Login</a>
                     </div>
@@ -41,7 +33,7 @@
                      <router-link class="font-weight-bold small" to="/register">Create Account</router-link>
                   </div>
                   <div class="text-center">
-                    <router-link class="font-weight-bold small" to="/forget-password">Forget Password</router-link>
+                    <router-link class="font-weight-bold small" to="/login">Already Have One ?</router-link>
                   </div>
                 </div>
               </div>
