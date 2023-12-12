@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
+import axios from "axios";
 import { routes } from "./routes";
 
 const app = createApp({
@@ -11,6 +12,6 @@ const router = createRouter({
     routes,
 });
 
-app.use(router);
+app.use(router, axios);
 
 app.mount("#app");
