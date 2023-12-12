@@ -91,6 +91,7 @@
 
 <script type="text/javascript">
 import axios from "axios";
+import User from "../../Helpers/User";
 export default {
     data() {
         return {
@@ -104,7 +105,7 @@ export default {
         login() {
             axios
                 .post("/api/auth/login", this.form)
-                .then((res) => console.log(res.data))
+                .then((res) => User.responseAfterLogin(res))
                 .catch((error) => console.log(error.response.data));
         },
     },
