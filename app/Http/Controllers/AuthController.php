@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use DB;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -31,6 +34,32 @@ class AuthController extends Controller
 
         return response()->json(['error' => 'Unauthorized'], 401);
     }
+
+     public function Signup(Request $request)
+    {
+
+        $validateData=$request->validate([
+            'email' => 'required|unique:users|max:255',
+            'name' => 'required',
+            'password' => 'required|min:8|confirmed'
+        ]);
+        // $data=array();
+        // $data['name']=$request->name;
+        // $data['email']=$request->email;
+        // $data['password']=Hash::make($request->password);
+        // DB::table('users')->insert($data);
+
+        User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
+
+        return $this->login($request);
+    }
+
+
+    
 
     /**
      * Get the authenticated User
