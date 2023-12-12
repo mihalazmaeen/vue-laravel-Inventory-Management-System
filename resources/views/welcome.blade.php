@@ -18,7 +18,7 @@
 </head>
 
 <body id="page-top">
-    <div id="app">
+<div id="app">
 
  
   <div id="wrapper">
@@ -329,8 +329,8 @@
   <script src="{{asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('backend/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
-  <script src="{{asset('backend/vendor/chartjs/Chart.min.js')}}"></script>
-  <script src="{{asset('backend/js/demo/chart-area-demo.js')}}"></script>  
+  {{-- <script src="{{asset('backend/vendor/chartjs/Chart.min.js')}}"></script>
+  <script src="{{asset('backend/js/demo/chart-area-demo.js')}}"></script>   --}}
   <script src="{{asset('backend/js/ruang-admin.min.js')}}"></script>
  {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 
