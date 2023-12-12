@@ -20,3 +20,4 @@ class AppStorage {
         localStorage.getItem("user");
     }
 }
+export default AppStorage = new AppStorage();
