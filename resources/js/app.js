@@ -5,6 +5,8 @@ import { routes } from "./routes";
 import User from "./Helpers/User";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import ToastPlugin from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-bootstrap.css";
 
 
 const app = createApp({});
@@ -16,6 +18,7 @@ const router = createRouter({
 
 app.use(router);
 app.use(VueSweetalert2);
+
 
 // Provide the User instance in the main Vue app or a global component
 app.provide("User", User);
