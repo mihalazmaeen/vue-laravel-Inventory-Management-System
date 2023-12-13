@@ -113,27 +113,30 @@ export default {
         };
     },
     methods: {
-        login() {
-            axios
-                .post("/api/auth/login", this.form)
-                .then((res) =>{
-                    User.responseAfterLogin(res)
+            login() {
+            axios.post("/api/auth/login", this.form)
+                .then((res) => {
+                    User.responseAfterLogin(res);
                     this.$swal({
-                        icon:"success",
-                        position:"top-end",
-                        title:"Signed In Successful"
-                    })
-                    this.$router.push({name:'home'})
+                        icon: "success",
+                        position: "top-end",
+                        title: "Signed In Successfully",
+                    });
+                    this.$router.push({ name: 'home' });
                 })
-                .catch(error=>this.errors=error.response.data.errors)
-                .catch(
+                .catch((error) => {
+                    this.errors = error.response.data.errors;
                     this.$swal({
-                        icon:"error",
-                        position:"top-end",
-                        title:"Invalid Credentials"
-                    })
-                );
+                        icon: "error",
+                        position: "top-end",
+                        title: "Invalid Credentials",
+                    });
+                    // Stop the execution or handle the error as needed
+                    // For example, you can return here to prevent the next .then block
+                    // return;
+                });
         },
+
       
     },
 };
