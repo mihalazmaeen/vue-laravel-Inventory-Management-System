@@ -22,6 +22,7 @@
                                                 aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address"
                                             />
+                                            <small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
                                         </div>
                                         <div class="form-group">
                                             <input
@@ -31,6 +32,7 @@
                                                 id="exampleInputPassword"
                                                 placeholder="Password"
                                             />
+                                            <small class="text-danger" v-if="errors.password">{{ errors.password[0] }}</small>
                                         </div>
                                         <div class="form-group">
                                             <div
@@ -55,6 +57,7 @@
                                             >
                                                 Login
                                             </button>
+                                           
                                         </div>
                                         <hr />
                                         <!-- <a href="index.html" class="btn btn-google btn-block">
@@ -93,12 +96,20 @@
 import axios from "axios";
 import User from "../../Helpers/User";
 export default {
+    created(){
+        if(User.loggedIn()){
+            this.$router.push({name:'home'})
+        }
+    },
     data() {
         return {
             form: {
                 email: null,
                 password: null,
             },
+            errors:{
+
+            }
         };
     },
     methods: {
@@ -107,10 +118,23 @@ export default {
                 .post("/api/auth/login", this.form)
                 .then((res) =>{
                     User.responseAfterLogin(res)
+                    this.$swal({
+                        icon:"success",
+                        position:"top-end",
+                        title:"Signed In Successful"
+                    })
                     this.$router.push({name:'home'})
                 })
-                .catch((error) => console.log(error.response.data));
+                .catch(error=>this.errors=error.response.data.errors)
+                .catch(
+                    this.$swal({
+                        icon:"error",
+                        position:"top-end",
+                        title:"Invalid Credentials"
+                    })
+                );
         },
+      
     },
 };
 </script>

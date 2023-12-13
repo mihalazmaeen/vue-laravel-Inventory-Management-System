@@ -531,6 +531,14 @@
 </template>
 
 <script type="text/javascript">
-import {Chart} from "chart.js"
-export default {};
+
+import User from "../Helpers/User";
+export default {
+    created(){
+        if(!User.loggedIn()){
+            this.$router.push({name:'login'})
+        }
+    },
+   
+};
 </script>
