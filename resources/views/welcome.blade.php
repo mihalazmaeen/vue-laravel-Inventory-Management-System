@@ -22,7 +22,9 @@
 
  
   <div id="wrapper">
+
     <!-- Sidebar -->
+    <nav id="sidebar" v-show="$route.path === '/login' || $route.path === '/signup' || $route.path === '/forget-password' ? false : true" style="display:none;">
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon">
@@ -114,10 +116,12 @@
       <div class="version" id="version-ruangadmin"></div>
     </ul>
     <!-- Sidebar -->
+  </nav>
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
+
         <!-- TopBar -->
-        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" v-show="$route.path === '/login' || $route.path === '/signup' || $route.path === '/forget-password' ? false : true" style="display:none;">
           <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
@@ -308,6 +312,8 @@
         </div>
         <!-- Topbar -->
 
+
+
         <!-- Container Fluid-->
        
         <!---Container Fluid-->
@@ -332,6 +338,13 @@
   {{-- <script src="{{asset('backend/vendor/chartjs/Chart.min.js')}}"></script>
   <script src="{{asset('backend/js/demo/chart-area-demo.js')}}"></script>   --}}
   <script src="{{asset('backend/js/ruang-admin.min.js')}}"></script>
+  <script>
+    let token=localStorage.getItem('token');
+    if(token){
+      $('#sidebar').css('display', '');
+      $('#topbar').css('display', '');
+    }
+  </script>
  {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 
 
