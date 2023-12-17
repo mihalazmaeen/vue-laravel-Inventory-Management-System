@@ -2,11 +2,7 @@
     <div>
         <div class="row justify-content-center">
             <div class="col-xl-10 col-lg-12 col-md-9">
-                 <div class="row">
-                    <router-link to="/all-employee" class="btn btn-primary">
-                        All Employee
-                    </router-link>
-                </div>
+            
                
                 <div class="card shadow-sm my-5">
                     
@@ -19,7 +15,7 @@
                                             Add Employee
                                         </h1>
                                     </div>
-                                    <form class="user" @submit.prevent="signup">
+                                    <form class="user" @submit.prevent="AddEmployee" enctype="multipart/form-data">
                                         <div class="form-group">
                                            <div class="row">
                                                 <div class="col-md-6">
@@ -31,6 +27,9 @@
                                                         id="exampleInputFirstName"
                                                         placeholder="Enter First Name"
                                                     />
+                                                    <small class="text-danger" v-if="errors.fname">
+                                                        {{ errors.fname[0] }}
+                                                    </small>
                                                 </div>
                                                 <div class="col-md-6">
                                                      <label>Last Name</label>
@@ -41,6 +40,9 @@
                                                         id="exampleInputFirstName"
                                                         placeholder="Enter Last Name"
                                                     />
+                                                     <small class="text-danger" v-if="errors.lname">
+                                                        {{ errors.lname[0] }}
+                                                    </small>
                                                     
                                                 </div>
                                            </div>
@@ -58,6 +60,9 @@
                                                         aria-describedby="emailHelp"
                                                         placeholder="Enter Email Address"
                                                     />
+                                                    <small class="text-danger" v-if="errors.email">
+                                                        {{ errors.email[0] }}
+                                                    </small>
                                                   
                                                 </div>
                                                 <div class="col-md-6">
@@ -69,6 +74,9 @@
                                                         id="exampleInputPassword"
                                                         placeholder="Enter address"
                                                     />
+                                                    <small class="text-danger" v-if="errors.address">
+                                                        {{ errors.address[0] }}
+                                                    </small>
                                                 
                                                 </div>
                                            </div>
@@ -85,7 +93,9 @@
                                                         id="exampleInputPasswordRepeat"
                                                         placeholder="Enter Salary"
                                                     />
-                                                  
+                                                     <small class="text-danger" v-if="errors.salary">
+                                                        {{ errors.salary[0] }}
+                                                    </small>
                                                 </div>
                                                 <div class="col-md-6">
                                                      <label>Joining Date</label>
@@ -96,6 +106,9 @@
                                                         id="exampleInputPassword"
                                                         placeholder="Enter Joining Date"
                                                     />
+                                                    <small class="text-danger" v-if="errors.joiningDate">
+                                                        {{ errors.joiningDate[0] }}
+                                                    </small>
                                                   
                                                 </div>
                                            </div>
@@ -112,6 +125,9 @@
                                                         id="exampleInputPasswordRepeat"
                                                         placeholder="Enter NID"
                                                     />
+                                                    <small class="text-danger" v-if="errors.nid">
+                                                        {{ errors.nid[0] }}
+                                                    </small>
                                                   
                                                 </div>
                                                 <div class="col-md-6">
@@ -123,6 +139,9 @@
                                                         id="exampleInputPassword"
                                                         placeholder="Enter Contact Number"
                                                     />
+                                                    <small class="text-danger" v-if="errors.phoneNumber">
+                                                        {{ errors.phoneNumber[0] }}
+                                                    </small>
 
                                                 </div>
                                                 
@@ -138,6 +157,9 @@
                                                         class="custom-file-input"
                                                         id="customFile"
                                                     />
+                                                    <small class="text-danger" v-if="errors.photo">
+                                                        {{ errors.photo[0] }}
+                                                    </small>
                                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                                   
                                                 </div>
@@ -167,10 +189,9 @@
                                   
                                     <div class="text-center">
                                         <router-link
-                                            class="font-weight-bold small"
-                                            to="/login"
-                                            >Already have an
-                                            account?</router-link
+                                            class="font-weight-bold small btn btn-primary"
+                                            to="/all-employee"
+                                            >Employee List</router-link
                                         >
                                     </div>
                                     <div class="text-center"></div>
@@ -183,7 +204,7 @@
         </div>
     </div>
 </template>
-
+p
 <script type="text/javascript">
 import axios from "axios";
 import User from "../../Helpers/User";
@@ -196,11 +217,15 @@ export default {
     data() {
         return {
             form: {
-                name: null,
+                fname: null,
+                lname: null,
                 email: null,
-                password: null,
-                password_confirmation:null,
-               
+                address: null,
+                nid: null,
+                photo: null,
+                phoneNumber: null,
+                joiningDate: null,
+                salary: null    
             },
             errors: {},
         };
