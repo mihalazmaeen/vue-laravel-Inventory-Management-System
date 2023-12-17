@@ -125,21 +125,46 @@ export default {
                     User.responseAfterLogin(res);
                     this.$swal({
                         icon: "success",
+                        title: "Signed in successfully",
+                        toast: true,
                         position: "top-end",
-                        title: "Signed In Successfully",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        onOpen: (toast) => {
+                            toast.addEventListener(
+                                "mouseenter",
+                                Swal.stopTimer
+                            );
+                            toast.addEventListener(
+                                "mouseleave",
+                                Swal.resumeTimer
+                            );
+                        },
                     });
                     this.$router.push({ name: "home" });
                 })
                 .catch((error) => {
                     this.errors = error.response.data.errors;
                     this.$swal({
-                        icon: "error",
+                        icon: "warning",
+                        title: "Invalid Eamil or Password",
+                        toast: true,
                         position: "top-end",
-                        title: "Invalid Credentials",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        onOpen: (toast) => {
+                            toast.addEventListener(
+                                "mouseenter",
+                                Swal.stopTimer
+                            );
+                            toast.addEventListener(
+                                "mouseleave",
+                                Swal.resumeTimer
+                            );
+                        },
                     });
-                    // Stop the execution or handle the error as needed
-                    // For example, you can return here to prevent the next .then block
-                    // return;
                 });
         },
     },
