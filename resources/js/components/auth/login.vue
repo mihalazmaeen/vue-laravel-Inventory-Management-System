@@ -102,6 +102,7 @@
 <script type="text/javascript">
 import axios from "axios";
 import User from "../../Helpers/User";
+import Notification from "../../Helpers/Notification";
 export default {
     created() {
         if (User.loggedIn()) {
@@ -123,25 +124,7 @@ export default {
                 .post("/api/auth/login", this.form)
                 .then((res) => {
                     User.responseAfterLogin(res);
-                    this.$swal({
-                        icon: "success",
-                        title: "Signed in successfully",
-                        toast: true,
-                        position: "top-end",
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        onOpen: (toast) => {
-                            toast.addEventListener(
-                                "mouseenter",
-                                Swal.stopTimer
-                            );
-                            toast.addEventListener(
-                                "mouseleave",
-                                Swal.resumeTimer
-                            );
-                        },
-                    });
+                    Notification.success('Successfully Logged In');
                     this.$router.push({ name: "home" });
                 })
                 .catch((error) => {

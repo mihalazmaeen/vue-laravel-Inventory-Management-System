@@ -203,7 +203,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <img
-                                                        src="form.photo"
+                                                        :src="form.photo"
                                                         style="
                                                             height: 40px;
                                                             width: 40px;
@@ -252,12 +252,14 @@ import User from "../../Helpers/User";
 import Notification from "../../Helpers/Notification";
 
 
+
 export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: "login" });
         }
     },
+
     data() {
         return {
             form: {
@@ -275,26 +277,44 @@ export default {
         };
     },
     methods: {
-        signup() {},
+        AddEmployee() {
+            axios
+                .post("/api/employee", this.form)
+                .then(() => {
+                    this.$router.push({ name: "all-employee" });
+                    this.$swal({
+                        icon: "success",
+                        title: "Employee Added Successfully",
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 1000,
+                        timerProgressBar: true,
+                        onOpen: (toast) => {
+                            toast.addEventListener(
+                                "mouseenter",
+                                this.$swal.stopTimer
+                            );
+                            toast.addEventListener(
+                                "mouseleave",
+                                this.$swal.resumeTimer
+                            );
+                        },
+                    });
+                })
+                .catch((error) => (this.errors = error.response.data.errors));
+        },
         SelectedFile(event) {
             let file = event.target.files[0];
             if (file.size > 1048770) {
-                this.$swal({
-                    icon: "error",
-                    title: "Image size should be less than 1 MB",
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 1000,
-                    timerProgressBar: true,
-                    onOpen: (toast) => {
-                        toast.addEventListener("mouseenter", this.$swal.stopTimer);
-                        toast.addEventListener("mouseleave", this.$swal.resumeTimer);
-                    },
-                });
-       
+                 Notification.error('Image must be less than 1 MB');
             } else {
-                console.log(event);
+                let reader = new FileReader();
+                reader.onload = (event) => {
+                    this.form.photo = event.target.result;
+                    console.log(event.target.result);
+                };
+                reader.readAsDataURL(file);
             }
         },
     },
