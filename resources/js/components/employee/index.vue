@@ -24,10 +24,13 @@
                                             >Add Employee</router-link
                                         >
                                     </div>
-                                    <div class="text-center"></div>
+                                  
                                 </div>
                             </div>
                         </div>
+                          <div class="form-group">
+                                      <input type="text" v-model="searchKey" class="form-control" placeholder="Enter Search Term" id="search-key">
+                                    </div>
                           <div class="row">
             <div class="col-lg-12 mb-4">
               <!-- Simple Tables -->
@@ -47,7 +50,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="employee in employees" :key="employee.id">
+                      <tr v-for="employee in filtersearch" :key="employee.id">
                         <td>{{ employee.fname }} {{ employee.lname }}</td>
                         <td>{{ employee.email }}</td>
                         <td>{{ employee.phone_number }}</td>
@@ -86,7 +89,27 @@ export default {
     },
     data() {
         return {
-            employees:[]
+            employees:[],
+            searchKey:''
+        }
+    },
+   computed:{
+        filtersearch(){
+            const searchTermLower = this.searchKey.toLowerCase();
+            return this.employees.filter(employee => {
+                return (
+                    (employee.fname && employee.fname.toLowerCase().includes(searchTermLower)) ||
+                    (employee.phone_number && employee.phone_number.toLowerCase().includes(searchTermLower)) ||
+                    (employee.lname && employee.lname.toLowerCase().includes(searchTermLower)) ||
+                    (employee.email && employee.email.toLowerCase().includes(searchTermLower)) 
+                );
+            });
+            // return this.employees.filter(employee =>{
+            //     return (
+            //         (employee.name && employee.name.match(this.searchTerm)) ||
+            //         (employee.email && employee.email.match(this.searchTerm))
+            //     );
+            // })
         }
     },
    
@@ -102,5 +125,8 @@ export default {
 #em_photo{
     height: 40px;
     width: 40px;
+}
+#search-key{
+  width: 300px;
 }
 </style>
