@@ -122,6 +122,7 @@
 <script type="text/javascript">
 import axios from "axios";
 import User from "../../Helpers/User";
+import Notification from "../../Helpers/Notification";
 import Swal from "sweetalert2";
 export default {
     created() {
@@ -168,15 +169,7 @@ export default {
                 .catch();
         },
         deleteEmployee(id) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-            }).then((result) => {
+           Notification.deleteId().then((result) => {
                 if (result.isConfirmed) {
                     axios
                         .delete("/api/employee/" + id)
@@ -188,13 +181,9 @@ export default {
                             );
                         })
                         .catch(() => {
-                            this.$router.push({ name: all - employee });
+                            this.$router.push({ name: all-employee });
                         });
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success",
-                    });
+                   Notification.deleteConfirm();
                 }
             });
         },
