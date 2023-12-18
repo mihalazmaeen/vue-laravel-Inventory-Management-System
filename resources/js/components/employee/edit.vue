@@ -14,7 +14,7 @@
                                     </div>
                                     <form
                                         class="user"
-                                        @submit.prevent="AddEmployee"
+                                        @submit.prevent="updateEmployee"
                                         enctype="multipart/form-data"
                                     >
                                         <div class="form-group">
@@ -203,7 +203,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <img
-                                                        :src="form.photo"
+                                                        :src="form.newPhoto"
                                                         style="
                                                             height: 40px;
                                                             width: 40px;
@@ -216,7 +216,7 @@
                                             <button
                                                 class="btn btn-primary btn-block"
                                             >
-                                                Add
+                                                Update
                                             </button>
                                         </div>
                                         <hr />
@@ -279,27 +279,28 @@ export default {
     data() {
         return {
             form: {
-                fname: null,
-                lname: null,
-                email: null,
-                address: null,
-                nid: null,
-                photo: null,
-                phoneNumber: null,
-                joiningDate: null,
-                salary: null,
+                fname: '',
+                lname: '',
+                email: '',
+                address: '',
+                nid: '',
+                photo: '',
+                newPhoto: '',
+                phoneNumber: '',
+                joiningDate: '',
+                salary: '',
             },
             errors: {},
         };
     },
 
     methods: {
-        AddEmployee() {
-            axios
-                .post("api/employee", this.form)
+        updateEmployee() {
+            let id = this.$route.params.id
+       axios.patch('/api/employee/'+id,this.form)
                 .then(() => {
                     this.$router.push({ name: "all-employee" });
-                    Notification.success("Employee Added successfully");
+                    Notification.success("Employee Updated successfully");
                 })
                 .catch((error) => (this.errors = error.response.data.errors));
         },
@@ -310,8 +311,8 @@ export default {
             } else {
                 let reader = new FileReader();
                 reader.onload = (event) => {
-                    this.form.photo = event.target.result;
-                    console.log(event.target.result);
+                    this.form.newPhoto = event.target.result;
+                 
                 };
                 reader.readAsDataURL(file);
             }
