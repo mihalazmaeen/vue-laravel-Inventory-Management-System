@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Model\Employee;
 use Illuminate\Http\Request;
-// use Image;
-use Intervention\Image\Facades\Image;
+use Image;
+// use Intervention\Image\Facades\Image;
 
 class EmployeeController extends Controller
 {
@@ -44,15 +44,7 @@ class EmployeeController extends Controller
         ]);
         if($request->photo){
 
-        // $position = strpos($request->photo, ';');
-        //  $sub = substr($request->photo, 0, $position);
-        //  $ext = explode('/', $sub)[1];
 
-        //  $name = time().".".$ext;
-        //  $img = Image::make($request->photo)->resize(240,200);
-        //  $upload_path = 'backend/employee/';
-        //  $image_url = $upload_path.$name;
-        //  $img->save($image_url);
 
             $position= strpos($request->photo, ';');
             $sub=substr($request->photo, 0, $position);
@@ -129,6 +121,14 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee=Employee::find($id)->first();
+        $photo=$employee->photo;
+        if($photo){
+            unlink($photo);
+            Employee::find($id)->delete();
+
+        }else{
+            Employee::find($id)->delete();
+        }
     }
 }
