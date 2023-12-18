@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\EmployeeController;
 
 
 Route::group([
@@ -19,4 +20,4 @@ Route::group([
     Route::post('me', 'AuthController@me');
 
 });
-Route::apiResource('/employee','Api\EmployeeController');
+Route::apiResource('/employee','App\Http\Controllers\Api\EmployeeController');

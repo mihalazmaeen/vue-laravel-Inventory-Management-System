@@ -28,6 +28,44 @@
                                 </div>
                             </div>
                         </div>
+                          <div class="row">
+            <div class="col-lg-12 mb-4">
+              <!-- Simple Tables -->
+              <div class="card">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Simple Tables</h6>
+                </div>
+                <div class="table-responsive">
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Photo</th>
+                        <th>Joining Date</th>
+                        <th>Salary</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="employee in employees" :key="employee.id">
+                        <td>{{ employee.fname }}{{ employee.lname }}</td>
+                        <td>{{ employee.email }}</td>
+                        <td>{{ employee.phone_number }}</td>
+                        <td><img :src="employee.photo" id="em_photo"></td>
+                        <td>{{ employee.joining_date }}</td>
+                        <td>{{ employee.salary }}</td>
+                        <td>Nasi Padang</td>
+                      </tr>
+                   
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-footer"></div>
+              </div>
+            </div>
+          </div>
                     </div>
                 </div>
             </div>
@@ -43,35 +81,25 @@ export default {
         if (!User.loggedIn()) {
             this.$router.push({ name: "login" });
         }
+        this.AllEmployee()
+    },
+    data() {
+        return {
+            employees:[]
+        }
     },
    
     methods: {
-        signup() {
-            axios
-                .post("/api/auth/signup", this.form)
-                .then((res) => {
-                    User.responseAfterLogin(res);
-                    this.$swal({
-                        icon: "success",
-                        position: "top-end",
-                        title: "Registered Successfully",
-                    });
-                    this.$router.push({ name: "home" });
-                })
-                .catch((error) => {
-                    this.errors = error.response.data.errors;
-                    this.$swal({
-                        icon: "error",
-                        position: "top-end",
-                        title: "Invalid Credentials",
-                    });
-                    // Stop the execution or handle the error as needed
-                    // For example, you can return here to prevent the next .then block
-                    // return;
-                });
-        },
+      AllEmployee(){
+        axios.get('/api/employee/').then(({data})=>(this.employees = data)).catch()
+      }
     },
 };
 </script>
 
-<style type="text/css"></style>
+<style type="text/css">
+#em_photo{
+    height: 40px;
+    width: 40px;
+}
+</style>

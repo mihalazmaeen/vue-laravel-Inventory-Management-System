@@ -279,28 +279,10 @@ export default {
     methods: {
         AddEmployee() {
             axios
-                .post("/api/employee", this.form)
+                .post("api/employee", this.form)
                 .then(() => {
                     this.$router.push({ name: "all-employee" });
-                    this.$swal({
-                        icon: "success",
-                        title: "Employee Added Successfully",
-                        toast: true,
-                        position: "top-end",
-                        showConfirmButton: false,
-                        timer: 1000,
-                        timerProgressBar: true,
-                        onOpen: (toast) => {
-                            toast.addEventListener(
-                                "mouseenter",
-                                this.$swal.stopTimer
-                            );
-                            toast.addEventListener(
-                                "mouseleave",
-                                this.$swal.resumeTimer
-                            );
-                        },
-                    });
+                    Notification.success('Employee Added successfully');
                 })
                 .catch((error) => (this.errors = error.response.data.errors));
         },
