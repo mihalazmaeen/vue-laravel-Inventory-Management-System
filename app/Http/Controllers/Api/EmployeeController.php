@@ -91,7 +91,7 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(Employee::find($id)->first());
     }
 
     /**

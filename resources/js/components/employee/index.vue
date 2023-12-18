@@ -85,10 +85,10 @@
                                                         {{ employee.salary }}
                                                     </td>
                                                     <td>
-                                                        <a
-                                                            href="#"
+                                                        <router-link
+                                                           :to="{name:'edit-employee',params:{id:employee.id}}"
                                                             class="btn btn-sm btn-primary mr-2"
-                                                            >Edit</a
+                                                            >Edit</router-link
                                                         >
                                                         <a
                                                             @click="

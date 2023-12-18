@@ -5,6 +5,7 @@ import logoutComponent from "./components/auth/logout.vue";
 import HomeComponent from "./components/home.vue";
 import AddEmployeeComponent from "./components/employee/create.vue";
 import AllEmployeeComponent from "./components/employee/index.vue";
+import EditEmployeeComponent from "./components/employee/edit.vue";
 
 export const routes = [
     { path: "/login", component: LoginComponent, name: "login" },
@@ -27,5 +28,10 @@ export const routes = [
         path: "/all-employee",
         component: AllEmployeeComponent,
         name: "all-employee",
+    },
+    {
+        path: "/edit-employee/:id",
+        component: EditEmployeeComponent,
+        name: "edit-employee",
     },
 ];
