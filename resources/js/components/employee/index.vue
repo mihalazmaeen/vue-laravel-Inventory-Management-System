@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row justify-content-center">
-            <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="col-xl-12 col-lg-12 col-md-12">
             
                
                 <div class="card shadow-sm my-5">
@@ -32,9 +32,7 @@
             <div class="col-lg-12 mb-4">
               <!-- Simple Tables -->
               <div class="card">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Simple Tables</h6>
-                </div>
+               
                 <div class="table-responsive">
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
@@ -50,13 +48,16 @@
                     </thead>
                     <tbody>
                       <tr v-for="employee in employees" :key="employee.id">
-                        <td>{{ employee.fname }}{{ employee.lname }}</td>
+                        <td>{{ employee.fname }} {{ employee.lname }}</td>
                         <td>{{ employee.email }}</td>
                         <td>{{ employee.phone_number }}</td>
                         <td><img :src="employee.photo" id="em_photo"></td>
                         <td>{{ employee.joining_date }}</td>
                         <td>{{ employee.salary }}</td>
-                        <td>Nasi Padang</td>
+                        <td>
+                          <a href="#" class="btn btn-sm btn-primary">Edit</a>
+                          <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
                       </tr>
                    
                     </tbody>
