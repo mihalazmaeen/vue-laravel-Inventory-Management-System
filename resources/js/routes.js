@@ -3,9 +3,14 @@ import RegisterComponent from "./components/auth/register.vue";
 import ForgetPasswordComponent from "./components/auth/forgetPassword.vue";
 import logoutComponent from "./components/auth/logout.vue";
 import HomeComponent from "./components/home.vue";
+// employee routes
 import AddEmployeeComponent from "./components/employee/create.vue";
 import AllEmployeeComponent from "./components/employee/index.vue";
 import EditEmployeeComponent from "./components/employee/edit.vue";
+// Supplier Routes
+import AddSupplierComponent from "./components/supplier/create.vue";
+import AllSupplierComponent from "./components/supplier/index.vue";
+import EditSupplierComponent from "./components/supplier/edit.vue";
 
 export const routes = [
     { path: "/login", component: LoginComponent, name: "login" },
@@ -33,5 +38,20 @@ export const routes = [
         path: "/edit-employee/:id",
         component: EditEmployeeComponent,
         name: "edit-employee",
+    },
+    {
+        path: "/add-supplier",
+        component: AddSupplierComponent,
+        name: "add-supplier",
+    },
+    {
+        path: "/all-supplier",
+        component: AllSupplierComponent,
+        name: "all-supplier",
+    },
+    {
+        path: "/edit-supplier/:id",
+        component: EditSupplierComponent,
+        name: "edit-supplier",
     },
 ];

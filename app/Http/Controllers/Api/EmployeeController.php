@@ -135,7 +135,9 @@ class EmployeeController extends Controller
                     'phone_number' => $request->phoneNumber,
                     'photo'=>$image_url
                 ]);
-            }else{
+            }
+
+        }else{
                 $update=Employee::find($id)->update([
                     'fname' => $request->fname,
                     'lname' => $request->lname,
@@ -146,11 +148,9 @@ class EmployeeController extends Controller
                     'nid' => $request->nid,
                     'phone_number' => $request->phoneNumber,
                     'photo'=>$request->photo
-                     ]);
+                ]);
 
             }
-
-        }
   
     }
 
