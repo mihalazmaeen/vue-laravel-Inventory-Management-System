@@ -11,6 +11,10 @@ import EditEmployeeComponent from "./components/employee/edit.vue";
 import AddSupplierComponent from "./components/supplier/create.vue";
 import AllSupplierComponent from "./components/supplier/index.vue";
 import EditSupplierComponent from "./components/supplier/edit.vue";
+// Category Routes
+import AddCategoryComponent from "./components/category/create.vue";
+import AllCategoryComponent from "./components/category/index.vue";
+import EditCategoryComponent from "./components/category/edit.vue";
 
 export const routes = [
     { path: "/login", component: LoginComponent, name: "login" },
@@ -39,6 +43,7 @@ export const routes = [
         component: EditEmployeeComponent,
         name: "edit-employee",
     },
+    // SUpplier
     {
         path: "/add-supplier",
         component: AddSupplierComponent,
@@ -53,5 +58,21 @@ export const routes = [
         path: "/edit-supplier/:id",
         component: EditSupplierComponent,
         name: "edit-supplier",
+    },
+    // Category
+    {
+        path: "/add-category",
+        component: AddCategoryComponent,
+        name: "add-category",
+    },
+    {
+        path: "/all-category",
+        component: AllCategoryComponent,
+        name: "all-category",
+    },
+    {
+        path: "/edit-category/:id",
+        component: EditCategoryComponent,
+        name: "edit-category",
     },
 ];

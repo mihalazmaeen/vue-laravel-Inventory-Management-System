@@ -76,6 +76,24 @@
         </div>
       </li>
        {{-- Supplier Menu --}}
+
+       {{-- Category Menu  --}}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap2"
+          aria-expanded="true" aria-controls="collapseBootstrap2">
+          <i class="far fa-fw fa-window-maximize"></i>
+          <span>Category</span>
+        </a>
+        <div id="collapseBootstrap2" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Category</h6>
+            <router-link class="collapse-item" to="/all-category">All Category</router-link>
+            <router-link class="collapse-item" to="/add-category">Add Category</router-link>
+          </div>
+        </div>
+      </li>
+
+       {{-- Category Menu --}}
       <li class="nav-item">
         <a class="nav-link" href="forms.html">
           <i class="fab fa-fw fa-wpforms"></i>

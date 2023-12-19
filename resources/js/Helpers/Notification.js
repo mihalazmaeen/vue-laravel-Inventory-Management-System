@@ -37,7 +37,7 @@ class Notification {
     deleteConfirm(){
          Swal.fire({
              title: "Deleted!",
-             text: "Your file has been deleted.",
+             text: "Data has been deleted.",
              icon: "success",
          });
     }
