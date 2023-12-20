@@ -94,6 +94,25 @@
       </li>
 
        {{-- Category Menu --}}
+
+       {{-- Product Menu --}}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap3"
+          aria-expanded="true" aria-controls="collapseBootstrap3">
+          <i class="far fa-fw fa-window-maximize"></i>
+          <span>Product</span>
+        </a>
+        <div id="collapseBootstrap3" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Product</h6>
+            <router-link class="collapse-item" to="/all-product">All Product</router-link>
+            <router-link class="collapse-item" to="/add-product">Add Product</router-link>
+          </div>
+        </div>
+      </li>
+
+
+       {{-- Product Menu --}}
       <li class="nav-item">
         <a class="nav-link" href="forms.html">
           <i class="fab fa-fw fa-wpforms"></i>

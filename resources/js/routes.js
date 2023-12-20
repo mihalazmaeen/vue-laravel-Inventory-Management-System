@@ -15,6 +15,10 @@ import EditSupplierComponent from "./components/supplier/edit.vue";
 import AddCategoryComponent from "./components/category/create.vue";
 import AllCategoryComponent from "./components/category/index.vue";
 import EditCategoryComponent from "./components/category/edit.vue";
+// Prodcut Routes
+import AddProductComponent from "./components/product/create.vue";
+import AllProductComponent from "./components/product/index.vue";
+import EditProductComponent from "./components/product/edit.vue";
 
 export const routes = [
     { path: "/login", component: LoginComponent, name: "login" },
@@ -74,5 +78,21 @@ export const routes = [
         path: "/edit-category/:id",
         component: EditCategoryComponent,
         name: "edit-category",
+    },
+    // Product
+    {
+        path: "/add-product",
+        component: AddProductComponent,
+        name: "add-product",
+    },
+    {
+        path: "/all-product",
+        component: AllProductComponent,
+        name: "all-product",
+    },
+    {
+        path: "/edit-product/:id",
+        component: EditProductComponent,
+        name: "edit-product",
     },
 ];
