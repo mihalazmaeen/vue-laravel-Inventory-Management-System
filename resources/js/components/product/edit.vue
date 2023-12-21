@@ -70,20 +70,17 @@
                                                         for="exampleFormControlSelect1"
                                                         >Product Category</label
                                                     >
-                                                    <select
-                                                        class="form-control"
-                                                        id="exampleFormControlSelect1"
-                                                        v-model="
-                                                            form.category_id
-                                                        "
-                                                    >
-                                                        <option
-                                                            :value="category.id"
-                                                            v-for="category in categories"
-                                                        >
-                                                            {{ category.name }}
-                                                        </option>
-                                                    </select>
+                                                <VueMultiselect
+                                                v-model="form.category_id"
+                                                :options="formattedCategories"
+                                                :close-on-select="true"
+                                                :clear-on-select="false"
+                                                placeholder="Select one"
+                                                label="name"
+                                                track-by="id"
+                                                :select-label="''"
+                                            />
+                                                                                                
                                                     <small
                                                         class="text-danger"
                                                         v-if="
@@ -312,8 +309,13 @@
 import axios from "axios";
 import User from "../../Helpers/User";
 import Notification from "../../Helpers/Notification";
+import VueMultiselect from 'vue-multiselect';
+
+
+
 
 export default {
+   components: { VueMultiselect },
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: "login" });
@@ -335,12 +337,26 @@ export default {
                     buyingDate: data.buying_date,
                     productQuantity: data.product_quantity,
                 };
+                
             })
             .catch();
-        axios.get('/api/category/').then(({data})=>(this.categories=data));
+         axios.get('/api/category/')
+        .then(({ data }) => {
+            this.categories = data;
+            // Update the form data after fetching categories
+            this.form.category_id = data.find(category => category.id === this.form.category_id);
+        });
         // Get Suppliers 
         axios.get('/api/supplier/').then(({data})=>(this.suppliers=data));
     },
+    computed: {
+    formattedCategories() {
+      return this.categories.map((category) => ({
+        id: category.id,
+        name: category.name,
+      }));
+    },
+  },
 
     data() {
         return {
@@ -359,13 +375,15 @@ export default {
             },
             errors: {},
             suppliers: {},
-            categories: {},
+            categories: [],
+        
         };
     },
 
     methods: {
         updateProduct() {
             let id = this.$route.params.id;
+             this.form.category_id = this.form.category_id.id;
             axios
                 .patch("/api/product/" + id, this.form)
                 .then(() => {
@@ -390,4 +408,4 @@ export default {
 };
 </script>
 
-<style type="text/css"></style>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

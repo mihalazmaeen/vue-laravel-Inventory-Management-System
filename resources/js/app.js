@@ -9,7 +9,8 @@ import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import ToastPlugin from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-bootstrap.css";
-
+import Select2 from "vue3-select2-component";
+import $ from "jquery";
 
 const app = createApp({});
 
