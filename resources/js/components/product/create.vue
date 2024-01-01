@@ -53,10 +53,16 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="exampleFormControlSelect1">Product Category</label>
-                                                  <select class="form-control" id="exampleFormControlSelect1" v-model="form.category_id">
-                                                        <option :value="category.id" v-for="category in categories">{{ category.name }}</option>
-                                                     
-                                                  </select>
+                                                  <VueMultiselect
+                                                    v-model="form.category_id"
+                                                    :options="formattedCategories"
+                                                    :close-on-select="true"
+                                                    :clear-on-select="false"
+                                                    placeholder="Select one"
+                                                    label="name"
+                                                    track-by="id"
+                                                    :select-label="''"
+                                                />
                                                     <small
                                                         class="text-danger"
                                                         v-if="errors.category_id"
@@ -125,10 +131,16 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="exampleFormControlSelect1">Product Supplier</label>
-                                                 <select class="form-control" id="exampleFormControlSelect1" v-model="form.supplier_id">
-                                                        <option :value="supplier.id" v-for="supplier in suppliers">{{ supplier.name }}</option>
-                                                     
-                                                  </select>
+                                                 <VueMultiselect
+                                                    v-model="form.supplier_id"
+                                                    :options="formattedSuppliers"
+                                                    :close-on-select="true"
+                                                    :clear-on-select="false"
+                                                    placeholder="Select one"
+                                                    label="name"
+                                                    track-by="id"
+                                                    :select-label="''"
+                                                />
                                                     <small
                                                         class="text-danger"
                                                         v-if="errors.supplier_id"
@@ -240,19 +252,44 @@
 import axios from "axios";
 import User from "../../Helpers/User";
 import Notification from "../../Helpers/Notification";
+import VueMultiselect from 'vue-multiselect';
 
 
 
 export default {
+     components: { VueMultiselect },
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: "login" });
         }
         // Get Categories
-        axios.get('/api/category/').then(({data})=>(this.categories=data));
+         axios.get('/api/category/')
+        .then(({ data }) => {
+            this.categories = data;
+            // Update the form data after fetching categories
+            this.form.category_id = data.find(category => category.id === this.form.category_id);
+        });
         // Get Suppliers 
-        axios.get('/api/supplier/').then(({data})=>(this.suppliers=data));
+        axios.get('/api/supplier/').then(({data})=>{
+            this.suppliers = data;
+
+            this.form.supplier_id = data.find(supplier => supplier.id === this.form.supplier_id);
+        });
     },
+    computed: {
+    formattedCategories() {
+      return this.categories.map((category) => ({
+        id: category.id,
+        name: category.name,
+      }));
+    },
+    formattedSuppliers() {
+      return this.suppliers.map((supplier) => ({
+        id: supplier.id,
+        name: supplier.name,
+      }));
+    },
+  },
 
     data() {
         return {
@@ -269,12 +306,15 @@ export default {
                 productQuantity: null,
             },
             errors: {},
-            suppliers: {},
-            categories: {},
+            suppliers: [],
+            categories: [],
         };
     },
     methods: {
         AddProduct() {
+            this.form.category_id=this.form.category_id.id;
+            this.form.supplier_id=this.form.supplier_id.id;
+          
             axios
                 .post("api/product", this.form)
                 .then(() => {
@@ -300,4 +340,4 @@ export default {
 };
 </script>
 
-<style type="text/css"></style>   
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
